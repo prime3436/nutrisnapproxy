@@ -23,7 +23,7 @@
   </div>
 
   <div class="app-container">
-    <!-- Header -->
+
     <header class="app-header">
       <div class="logo-group">
         <div class="cyber-emblem">
@@ -48,7 +48,6 @@
       </div>
     </header>
 
-    <!-- Navigation Tabs -->
     <nav class="nav-tabs">
       <button class="nav-tab active" data-tab="tab-scan">
         <span class="tab-icon">📷</span> Scan & AI
@@ -64,13 +63,11 @@
       </button>
     </nav>
 
-    <!-- Main Content Area -->
     <main class="main-content">
 
-      <!-- TAB 1: SCAN & AI ANALYZER -->
       <section id="tab-scan" class="tab-pane active">
         <div class="grid-2col">
-          <!-- Camera & Upload Zone -->
+
           <div class="card glass-card scan-card">
             <h2 class="card-title"><span class="neon-cyan">AI Food</span> Scanner</h2>
             <p class="card-desc">Take a photo or upload a food image for instant AI nutrition breakdown.</p>
@@ -100,7 +97,6 @@
               </button>
             </div>
 
-            <!-- Preset Samples -->
             <div class="presets-section">
               <span class="presets-label">Or try sample meals:</span>
               <div class="presets-list">
@@ -112,7 +108,6 @@
             </div>
           </div>
 
-          <!-- Analysis Results Panel -->
           <div class="card glass-card result-card">
             <h2 class="card-title">Nutrition Breakdown</h2>
             <div id="resultPlaceholder" class="result-placeholder">
@@ -129,7 +124,6 @@
                 </div>
               </div>
 
-              <!-- Macro Grid -->
               <div class="macro-grid">
                 <div class="macro-card cals">
                   <span class="macro-val" id="resCals">0</span>
@@ -149,7 +143,6 @@
                 </div>
               </div>
 
-              <!-- Health Tag -->
               <div class="health-summary">
                 <span class="health-icon">💡</span>
                 <span id="resInsight">High protein meal, great for workout recovery!</span>
@@ -165,10 +158,9 @@
         </div>
       </section>
 
-      <!-- TAB 2: DASHBOARD -->
       <section id="tab-dashboard" class="tab-pane">
         <div class="dashboard-grid">
-          <!-- Calorie Progress Card -->
+
           <div class="card glass-card dash-main">
             <h2 class="card-title">Daily Calorie Target</h2>
             <div class="calorie-ring-container">
@@ -192,11 +184,10 @@
             </div>
           </div>
 
-          <!-- Macros Card -->
           <div class="card glass-card dash-macros">
             <h2 class="card-title">Macro Breakdown</h2>
             <div class="macro-progress-list">
-              <!-- Protein -->
+
               <div class="macro-bar-item">
                 <div class="macro-bar-header">
                   <span>💪 Protein</span>
@@ -206,7 +197,7 @@
                   <div id="barProtein" class="progress-bar bar-protein" style="width: 0%"></div>
                 </div>
               </div>
-              <!-- Carbs -->
+
               <div class="macro-bar-item">
                 <div class="macro-bar-header">
                   <span>🍞 Carbs</span>
@@ -216,7 +207,7 @@
                   <div id="barCarbs" class="progress-bar bar-carbs" style="width: 0%"></div>
                 </div>
               </div>
-              <!-- Fat -->
+
               <div class="macro-bar-item">
                 <div class="macro-bar-header">
                   <span>🥑 Fats</span>
@@ -229,7 +220,6 @@
             </div>
           </div>
 
-          <!-- Hydration Tracker -->
           <div class="card glass-card dash-water">
             <h2 class="card-title">💧 Hydration Log</h2>
             <div class="water-status">
@@ -246,7 +236,6 @@
             </div>
           </div>
 
-          <!-- Activity / Steps -->
           <div class="card glass-card dash-steps">
             <h2 class="card-title">👟 Step Counter Simulator</h2>
             <div class="step-status">
@@ -264,7 +253,6 @@
         </div>
       </section>
 
-      <!-- TAB 3: MEAL HISTORY -->
       <section id="tab-history" class="tab-pane">
         <div class="card glass-card">
           <div class="history-header">
@@ -272,12 +260,11 @@
             <button id="btnClearHistory" class="btn-glass btn-sm btn-danger-soft">Clear All</button>
           </div>
           <div id="historyList" class="history-list">
-            <!-- Dynamic history items rendered here -->
+
           </div>
         </div>
       </section>
 
-      <!-- TAB 4: CYBER AVATAR -->
       <section id="tab-avatar" class="tab-pane">
         <div class="grid-2col">
           <div class="card glass-card avatar-hero-card">
@@ -330,7 +317,6 @@
 
     </main>
 
-    <!-- Persistent Mini Avatar Dock -->
     <div id="avatarDock" class="persistent-dock">
       <div class="dock-avatar">🤖</div>
       <div class="dock-info">
@@ -342,7 +328,6 @@
 
   </div>
 
-  <!-- Manual Search Modal -->
   <div id="searchModal" class="modal-overlay hidden">
     <div class="modal-card">
       <div class="modal-header">
@@ -355,7 +340,6 @@
     </div>
   </div>
 
-  <!-- Gemini Key Modal -->
   <div id="apiKeyModal" class="modal-overlay hidden">
     <div class="modal-card">
       <div class="modal-header">

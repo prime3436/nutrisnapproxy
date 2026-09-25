@@ -1,6 +1,4 @@
-// NutriSnap (YOTRACKEZ) App Controller
 
-// App State
 const state = {
   dailyGoalCals: 2200,
   dailyGoalProtein: 140,
@@ -18,13 +16,11 @@ const state = {
   geminiKey: ''
 };
 
-// DOM Elements
 const elements = {
-  // Tabs
+
   tabs: document.querySelectorAll('.nav-tab'),
   panes: document.querySelectorAll('.tab-pane'),
 
-  // Dropzone & Scan
   dropzone: document.getElementById('dropzone'),
   fileInput: document.getElementById('fileInput'),
   dropzoneContent: document.getElementById('dropzoneContent'),
@@ -34,7 +30,6 @@ const elements = {
   btnAnalyze: document.getElementById('btnAnalyze'),
   btnManualSearch: document.getElementById('btnManualSearch'),
 
-  // Results
   resultPlaceholder: document.getElementById('resultPlaceholder'),
   resultContent: document.getElementById('resultContent'),
   resIcon: document.getElementById('resIcon'),
@@ -47,7 +42,6 @@ const elements = {
   resInsight: document.getElementById('resInsight'),
   btnLogMeal: document.getElementById('btnLogMeal'),
 
-  // Dashboard
   dashCalCurrent: document.getElementById('dashCalCurrent'),
   dashCalPercent: document.getElementById('dashCalPercent'),
   dashCalRemaining: document.getElementById('dashCalRemaining'),
@@ -68,11 +62,9 @@ const elements = {
   btnAddSteps1000: document.getElementById('btnAddSteps1000'),
   btnAddSteps5000: document.getElementById('btnAddSteps5000'),
 
-  // History
   historyList: document.getElementById('historyList'),
   btnClearHistory: document.getElementById('btnClearHistory'),
 
-  // Avatar
   avatarName: document.getElementById('avatarName'),
   avatarTitle: document.getElementById('avatarTitle'),
   headerLevelText: document.getElementById('headerLevelText'),
@@ -83,12 +75,10 @@ const elements = {
   badgeMacroMaster: document.getElementById('badgeMacroMaster'),
   badgePedometer: document.getElementById('badgePedometer'),
 
-  // Dock
   avatarDock: document.getElementById('avatarDock'),
   dockStatus: document.getElementById('dockStatus'),
   dockBtn: document.getElementById('dockBtn'),
 
-  // Modals
   searchModal: document.getElementById('searchModal'),
   btnCloseSearchModal: document.getElementById('btnCloseSearchModal'),
   dbSearchInput: document.getElementById('dbSearchInput'),
@@ -102,7 +92,6 @@ const elements = {
   btnClearKey: document.getElementById('btnClearKey')
 };
 
-// Quotes for Avatar
 const AVATAR_QUOTES = [
   "\"Great scan! Keeping your macros balanced optimizes cybernetic performance.\"",
   "\"Don't forget hydration! Drink water to keep your metabolism at max power.\"",
@@ -110,7 +99,6 @@ const AVATAR_QUOTES = [
   "\"Consistency is key. Every healthy bite fuels your body's energy core.\""
 ];
 
-// Initialize App
 document.addEventListener('DOMContentLoaded', () => {
   loadLocalStorage();
   setupTabNavigation();
@@ -122,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAll();
 });
 
-// Local Storage
 function loadLocalStorage() {
   const savedMeals = localStorage.getItem('nutri_meals');
   if (savedMeals) state.loggedMeals = JSON.parse(savedMeals);
@@ -150,7 +137,6 @@ function saveLocalStorage() {
   if (state.geminiKey) localStorage.setItem('nutri_gemini_key', state.geminiKey);
 }
 
-// Tab Navigation
 function setupTabNavigation() {
   elements.tabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -164,12 +150,11 @@ function setupTabNavigation() {
   });
 
   elements.dockBtn.addEventListener('click', () => {
-    // Switch to avatar tab
+
     elements.tabs[3].click();
   });
 }
 
-// Scan & Dropzone
 function setupScanDropzone() {
   const dropzone = elements.dropzone;
 
@@ -222,7 +207,6 @@ function handleImageFile(file) {
     elements.previewContainer.classList.remove('hidden');
     elements.btnAnalyze.disabled = false;
 
-    // Simulate food match as default preview
     state.selectedFood = simulateAiFoodScan(file.name);
   };
   reader.readAsDataURL(file);
@@ -239,7 +223,6 @@ function resetPreview() {
   state.currentFileName = '';
 }
 
-// Presets
 function setupPresets() {
   document.querySelectorAll('.preset-chip').forEach(chip => {
     chip.addEventListener('click', () => {
@@ -261,7 +244,7 @@ async function runAiAnalysis() {
         state.selectedFood = onlineFood;
       }
     } else if (!state.geminiKey && state.currentImageBase64) {
-      // Small notice that API Key enables live AI recognition
+
       elements.dockStatus.textContent = "💡 Add Gemini API Key for live AI photo vision!";
       setTimeout(() => { elements.dockStatus.textContent = "Ready to scan!"; }, 4000);
     }
@@ -330,7 +313,6 @@ function displayAnalysisResult(foodItem) {
   elements.resCarbs.textContent = `${foodItem.carbs}g`;
   elements.resFat.textContent = `${foodItem.fat}g`;
 
-  // Insight generator
   if (foodItem.protein > 25) {
     elements.resInsight.textContent = "High Protein powerhouse! Perfect for muscle repair and satiety.";
   } else if (foodItem.calories > 500) {
@@ -360,17 +342,14 @@ function logSelectedMeal() {
   saveLocalStorage();
   renderAll();
 
-  // Show dock toast message
   elements.dockStatus.textContent = `+50 XP! Logged ${newLog.name}`;
   setTimeout(() => {
     elements.dockStatus.textContent = "Ready to scan!";
   }, 3500);
 
-  // Switch to Dashboard
   elements.tabs[1].click();
 }
 
-// Dashboard & State Controls
 function setupDashboardControls() {
   elements.btnAddWater250.addEventListener('click', () => addWater(250));
   elements.btnAddWater500.addEventListener('click', () => addWater(500));
@@ -414,7 +393,6 @@ function calculateLevel() {
   state.level = Math.floor(state.xp / 200) + 1;
 }
 
-// Render Functions
 function renderAll() {
   renderDashboard();
   renderHistory();
@@ -422,13 +400,12 @@ function renderAll() {
 }
 
 function renderDashboard() {
-  // Totals
+
   const totalCals = state.loggedMeals.reduce((acc, m) => acc + m.calories, 0);
   const totalProtein = state.loggedMeals.reduce((acc, m) => acc + m.protein, 0);
   const totalCarbs = state.loggedMeals.reduce((acc, m) => acc + m.carbs, 0);
   const totalFat = state.loggedMeals.reduce((acc, m) => acc + m.fat, 0);
 
-  // Calorie Ring
   elements.dashCalCurrent.textContent = totalCals.toLocaleString();
   const pctCals = Math.min(100, Math.round((totalCals / state.dailyGoalCals) * 100));
   elements.dashCalPercent.textContent = `${pctCals}%`;
@@ -436,11 +413,9 @@ function renderDashboard() {
   const remaining = Math.max(0, state.dailyGoalCals - totalCals);
   elements.dashCalRemaining.textContent = `${remaining.toLocaleString()} kcal`;
 
-  // Ring offset calculation (440 circumference)
   const offset = 440 - (440 * (pctCals / 100));
   elements.calorieRingProgress.style.strokeDashoffset = offset;
 
-  // Macros
   elements.dashProteinText.textContent = `${totalProtein} / ${state.dailyGoalProtein}g`;
   elements.dashCarbsText.textContent = `${totalCarbs} / ${state.dailyGoalCarbs}g`;
   elements.dashFatText.textContent = `${totalFat} / ${state.dailyGoalFat}g`;
@@ -449,11 +424,9 @@ function renderDashboard() {
   elements.barCarbs.style.width = `${Math.min(100, (totalCarbs / state.dailyGoalCarbs) * 100)}%`;
   elements.barFat.style.width = `${Math.min(100, (totalFat / state.dailyGoalFat) * 100)}%`;
 
-  // Water
   elements.waterCurrent.textContent = `${state.waterIntake.toLocaleString()} ml`;
   elements.barWater.style.width = `${Math.min(100, (state.waterIntake / state.dailyGoalWater) * 100)}%`;
 
-  // Steps
   elements.stepCurrent.textContent = state.steps.toLocaleString();
   elements.barSteps.style.width = `${Math.min(100, (state.steps / state.dailyGoalSteps) * 100)}%`;
 }
@@ -492,11 +465,9 @@ function renderAvatar() {
   elements.xpText.textContent = `${xpCurrent} / 200 XP`;
   elements.barXp.style.width = `${(xpCurrent / 200) * 100}%`;
 
-  // Random quote
   const quoteIdx = state.level % AVATAR_QUOTES.length;
   elements.avatarQuote.textContent = AVATAR_QUOTES[quoteIdx];
 
-  // Badges
   if (state.waterIntake >= 2000) {
     elements.badgeHydrated.classList.add('active');
   }
@@ -508,7 +479,6 @@ function renderAvatar() {
   }
 }
 
-// Search Modal
 function setupSearchModal() {
   elements.btnManualSearch.addEventListener('click', () => {
     elements.searchModal.classList.remove('hidden');
@@ -546,7 +516,6 @@ function renderSearchResults(query) {
   });
 }
 
-// API Key Modal
 function setupApiKeyModal() {
   elements.btnApiKey.addEventListener('click', () => {
     elements.apiKeyInput.value = state.geminiKey;
@@ -571,3 +540,4 @@ function setupApiKeyModal() {
     elements.apiKeyModal.classList.add('hidden');
   });
 }
+

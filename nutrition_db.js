@@ -1,4 +1,4 @@
-// Nutrition Database for NutriSnap (YOTRACKEZ)
+
 const NUTRITION_DATABASE = [
   { id: 'avocado_toast', name: 'Avocado Toast with Egg', category: 'Breakfast', calories: 350, protein: 14, carbs: 28, fat: 22, fiber: 7, serving: '1 slice (180g)', icon: '🥑' },
   { id: 'oatmeal_berries', name: 'Berry & Honey Oatmeal', category: 'Breakfast', calories: 280, protein: 9, carbs: 52, fat: 4, fiber: 8, serving: '1 bowl (250g)', icon: '🥣' },
@@ -22,17 +22,15 @@ const NUTRITION_DATABASE = [
   { id: 'dark_chocolate', name: '70% Dark Chocolate', category: 'Snack', calories: 170, protein: 2.2, carbs: 13, fat: 12, fiber: 3.1, serving: '3 squares (30g)', icon: '🍫' }
 ];
 
-// Search helper
 function searchNutritionDb(query) {
   if (!query) return NUTRITION_DATABASE;
   const q = query.toLowerCase().trim();
-  return NUTRITION_DATABASE.filter(item => 
-    item.name.toLowerCase().includes(q) || 
+  return NUTRITION_DATABASE.filter(item =>
+    item.name.toLowerCase().includes(q) ||
     item.category.toLowerCase().includes(q)
   );
 }
 
-// Simulate AI Recognition from Image / Sample Keywords
 function simulateAiFoodScan(filenameOrKeyword = '') {
   const kw = filenameOrKeyword.toLowerCase();
   if (kw.includes('burger') || kw.includes('fast')) return NUTRITION_DATABASE.find(x => x.id === 'cheeseburger');
@@ -42,7 +40,7 @@ function simulateAiFoodScan(filenameOrKeyword = '') {
   if (kw.includes('egg') || kw.includes('avocado')) return NUTRITION_DATABASE.find(x => x.id === 'avocado_toast');
   if (kw.includes('shake') || kw.includes('protein')) return NUTRITION_DATABASE.find(x => x.id === 'protein_shake');
 
-  // Random sample fallback if unspecified
   const idx = Math.floor(Math.random() * NUTRITION_DATABASE.length);
   return NUTRITION_DATABASE[idx];
 }
+
